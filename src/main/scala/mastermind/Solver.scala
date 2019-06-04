@@ -12,8 +12,8 @@ object Solver {
       val guess = remainingPerms.head
       val guessScore = checkGuess(guess)
 
-      guessScore match{
-        case Score(4,0) => List(guess)
+      guessScore match {
+        case Score(4, 0) => List(guess)
         case _ => makeGuessAndFilter(filterPermutations(guess, guessScore, remainingPerms))
       }
     }

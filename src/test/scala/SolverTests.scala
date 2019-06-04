@@ -20,7 +20,6 @@ class SolverTests extends WordSpec with Matchers {
       val maker = Row(Red, Green, Blue, White)
 
       def checkGuess(guess: Row) : Score = {
-
         Scorer.score(maker, guess)
       }
 
