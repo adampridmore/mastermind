@@ -29,5 +29,4 @@ class ScorerTests extends WordSpec with Matchers {
      Scorer.score(makerRow, breakerRow) shouldBe Score(1, 1)
    }
  }
-
 }

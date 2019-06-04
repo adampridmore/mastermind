@@ -1,4 +1,4 @@
-import mastermind.{Row, Score, Solver}
+import mastermind.{Row, Score, Scorer, Solver}
 import org.scalatest.{Matchers, WordSpec}
 import mastermind.Colours._
 
@@ -11,7 +11,20 @@ class SolverTests extends WordSpec with Matchers {
         Row(Red, Red, Red, Red)
       )
       val guess = Row(Red, White, Blue, Yellow)
-      Solver.solve(guess, Score(3, 0), perms) shouldBe List(Row(Red, White, Blue, Blue))
+      Solver.filterPermutations(guess, Score(3, 0), perms) shouldBe List(Row(Red, White, Blue, Blue))
+    }
+  }
+
+  "Mastermind Solver with all permutations" should {
+    "solve a game" in {
+      val maker = Row(Red, Green, Blue, White)
+
+      def checkGuess(guess: Row) : Score = {
+
+        Scorer.score(maker, guess)
+      }
+
+      Solver.solve(checkGuess) shouldBe Row(Red, Green, Blue, White)
     }
   }
 }

@@ -6,7 +6,22 @@ import mastermind.Colours._
 // Red -> Correct colour (& NOT position)
 
 object Solver {
-  def solve(guess: Row, score: Score, perms: List[Row]): List[Row] = perms.collect {
+  def solve(checkGuess: Row => Score): Row = {
+
+    def makeGuessAndFilter(remainingPerms: List[Row]): List[Row] = {
+      val guess = remainingPerms.head
+      val guessScore = checkGuess(guess)
+
+      guessScore match{
+        case Score(4,0) => List(guess)
+        case _ => makeGuessAndFilter(filterPermutations(guess, guessScore, remainingPerms))
+      }
+    }
+
+    makeGuessAndFilter(Permutations).head
+  }
+
+  def filterPermutations(guess: Row, score: Score, perms: List[Row]): List[Row] = perms.collect {
     case p if Scorer.score(p, guess) == score => p
   }
 
@@ -20,5 +35,4 @@ object Solver {
       d <- allColours
     } yield Row(a, b, c, d)
   }
-
 }
