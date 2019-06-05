@@ -26,7 +26,7 @@ object Solver {
   }
 
   val Permutations: List[Row] = {
-    val allColours = List(Red, Green, Blue, Yellow, Black, White)
+    val allColours = List(Red, Green, Orange, Yellow, Black, White)
 
     for {
       a <- allColours

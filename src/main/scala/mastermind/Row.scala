@@ -4,12 +4,12 @@ trait Colour
 
 object Colour {
   def apply(s: String) = s.toUpperCase match {
-    case "RED" => Colours.Red
-    case "YELLOW" => Colours.Yellow
-    case "BLUE" => Colours.Blue
-    case "GREEN" => Colours.Green
-    case "BLACK" => Colours.Black
-    case "WHITE" => Colours.White
+    case "RED" | "R" => Colours.Red
+    case "YELLOW" | "Y" => Colours.Yellow
+    case "ORANGE" | "O" => Colours.Orange
+    case "GREEN" | "G" => Colours.Green
+    case "BLACK" | "B" => Colours.Black
+    case "WHITE" | "W" => Colours.White
     case invalid => throw new IllegalArgumentException(s"Invalid colour: $invalid")
   }
 }
@@ -20,7 +20,7 @@ object Colours {
 
   case object Yellow extends Colour
 
-  case object Blue extends Colour
+  case object Orange extends Colour
 
   case object Green extends Colour
 
