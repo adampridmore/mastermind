@@ -1,19 +1,21 @@
 package mastermind
 
-import scala.util.Random
-
 object Game extends App {
-  val masterPegs = Solver.Permutations(Random.nextInt(Solver.Permutations.length))
 
-  println("Shhh my pegs are:")
-  println(masterPegs)
+  def check(checkGuess: Row): Score = {
+    println("My guess is:")
+    println(checkGuess)
+    val scoreText = scala.io.StdIn.readLine("How many did I get right?     [r],[w]")
+    println(scoreText)
 
-  println("Please enter a colour guess: Red, White, Orange, Yellow, Black, Green")
-  
-  val guess = scala.io.StdIn.readLine("What is your guess?")
+    val split = scoreText.split(",")
+    val red = Integer.parseInt(split(0))
+    val white = Integer.parseInt(split(1))
 
-  val colours = guess.split(",").map(_.trim)
-  val guessRow = Row(colours.toList.map(Colour(_)))
+    Score(red, white)
+  }
 
-  println("Your score is: " + Scorer.score(masterPegs, guessRow))
+  val solution = Solver.solve(check)
+
+  println(s"I think you picked: $solution")
 }

@@ -3,18 +3,22 @@ package mastermind
 import mastermind.Colours._
 
 // Red -> Correct position &  colour
-// Red -> Correct colour (& NOT position)
+// White -> Correct colour (& NOT position)
 
 object Solver {
   def solve(checkGuess: Row => Score): Row = {
 
     def makeGuessAndFilter(remainingPerms: List[Row]): List[Row] = {
-      val guess = remainingPerms.head
-      val guessScore = checkGuess(guess)
 
-      guessScore match {
-        case Score(4, 0) => List(guess)
-        case _ => makeGuessAndFilter(filterPermutations(guess, guessScore, remainingPerms))
+      remainingPerms match {
+          // TODO - Need to write a test for this edge case
+        case Nil => throw new Exception("No perms remaining. Are you sure about your last score?") // TODO ; Handle this without exception?
+        case one :: Nil => List(one)
+        case _ => {
+          val guess = remainingPerms.head
+          val guessScore = checkGuess(guess)
+          makeGuessAndFilter(filterPermutations(guess, guessScore, remainingPerms))
+        }
       }
     }
 
