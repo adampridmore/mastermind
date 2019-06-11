@@ -8,6 +8,14 @@ import mastermind.Colours._
 object Solver {
   case class Solution(result: Row, iterations: Int)
 
+  def makeGuess(remainingPerms: List[Row]) = {
+    def pickFirst = remainingPerms.head
+    def pickMiddle = remainingPerms(remainingPerms.length / 2)
+    def pickOneThird = remainingPerms(remainingPerms.length / 3)
+
+    pickOneThird
+  }
+
   def solve(checkGuess: Row => Score): Solution = {
 
     def makeGuessAndFilter(remainingPerms: List[Row], iterations: Int): Solution = {
@@ -17,7 +25,7 @@ object Solver {
         case Nil => throw new Exception("No perms remaining. Are you sure about your last score?") // TODO ; Handle this without exception?
         case one :: Nil => Solution(one, iterations)
         case _ => {
-          val guess = remainingPerms.head
+          val guess = makeGuess(remainingPerms)
           val guessScore = checkGuess(guess)
           makeGuessAndFilter(filterPermutations(guess, guessScore, remainingPerms), iterations+1)
         }
@@ -31,13 +39,10 @@ object Solver {
     case p if Scorer.score(p, guess) == score => p
   }
 
-  val Permutations: List[Row] = {
-
-    for {
-      a <- AllColours
-      b <- AllColours
-      c <- AllColours
-      d <- AllColours
-    } yield Row(a, b, c, d)
-  }
+  val Permutations: List[Row] = for {
+    a <- AllColours
+    b <- AllColours
+    c <- AllColours
+    d <- AllColours
+  } yield Row(a, b, c, d)
 }

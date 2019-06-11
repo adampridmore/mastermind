@@ -1,4 +1,4 @@
-package mastermind
+import mastermind.{Row, Score, Solver}
 
 object Game extends App {
 
