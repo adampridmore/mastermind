@@ -23,7 +23,9 @@ class SolverTests extends WordSpec with Matchers {
         Scorer.score(maker, guess)
       }
 
-      Solver.solve(checkGuess) shouldBe Row(Red, Green, Orange, White)
+      val solution = Solver.solve(checkGuess)
+      solution.result shouldBe Row(Red, Green, Orange, White)
+      solution.iterations shouldBe 5
     }
   }
 }
