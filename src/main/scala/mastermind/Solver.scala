@@ -32,14 +32,14 @@ object Solver {
       }
     }
 
-    makeGuessAndFilter(Permutations,0)
+    makeGuessAndFilter(AllPermutations,0)
   }
 
   def filterPermutations(guess: Row, score: Score, perms: List[Row]): List[Row] = perms.collect {
     case p if Scorer.score(p, guess) == score => p
   }
 
-  val Permutations: List[Row] = for {
+  val AllPermutations: List[Row] = for {
     a <- AllColours
     b <- AllColours
     c <- AllColours

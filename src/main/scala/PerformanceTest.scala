@@ -12,14 +12,14 @@ object PerformanceTest extends App {
     solution.iterations
   }
 
-  val result = Solver.Permutations
+  val result = Solver.AllPermutations
     .map(perm => (perm, testPermutation(perm)))
     .groupBy(a => a._2)
     .map(a => (a._1, a._2.length))
     .toSeq
     .sortBy(a => -1 * a._1)
 
-  val averageIterations = result.map { case (a, b) => a * b }.sum.floatValue / Solver.Permutations.length.floatValue
+  val averageIterations = result.map { case (a, b) => a * b }.sum.floatValue / Solver.AllPermutations.length.floatValue
 
 
   println("Iterations for all permutations (iterations, number of maker's):")
