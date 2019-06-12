@@ -2,7 +2,7 @@
 
 ## Performance
 
-### pick first from remaining
+### Pick first from remaining
 
 `def pickFirst = remainingPerms.head`
 
