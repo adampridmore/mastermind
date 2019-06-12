@@ -33,7 +33,7 @@ Score:5.247685
 Score:4.3371916
 ```
 
-### Pick one third from remaining
+### Pick one third from remaining
 
 `def pickTwoThird = remainingPerms(remainingPerms.length / 3)`
 
