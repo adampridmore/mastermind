@@ -1,10 +1,10 @@
 package mastermind
 
-case class Row(pegs: List[Colour]) {
+case class Row[T](pegs: List[T]) {
   override def toString: String = pegs.mkString(",")
 }
 
 object Row {
-  def apply(first: Colour, second: Colour, third: Colour, fourth: Colour) : Row = Row(List(first, second, third, fourth))
+  def apply[T](first: T, second: T, third: T, fourth: T) : Row[T] = Row[T](List(first, second, third, fourth))
 }
 

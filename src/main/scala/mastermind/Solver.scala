@@ -1,14 +1,9 @@
 package mastermind
 
-import mastermind.Colours.AllColours
+class Solver[T] {
+  case class Solution(result: Row[T], iterations: Int)
 
-// Red -> Correct position &  colour
-// White -> Correct colour (& NOT position)
-
-object Solver extends Colour {
-  case class Solution(result: Row, iterations: Int)
-
-  def makeGuess(remainingPerms: List[Row]) = {
+  def makeGuess(remainingPerms: List[Row[T]]) = {
     def pickFirst = remainingPerms.head
     def pickMiddle = remainingPerms(remainingPerms.length / 2)
     def pickOneThird = remainingPerms(remainingPerms.length / 3)
@@ -16,13 +11,13 @@ object Solver extends Colour {
     pickOneThird
   }
 
-  def solve(checkGuess: Row => Score, allChoices : List[Colour]): Solution = {
+  def solve(checkGuess: Row[T] => Score, allChoices : List[T]): Solution = {
 
-    def makeGuessAndFilter(remainingPerms: List[Row], iterations: Int): Solution = {
+    def makeGuessAndFilter(remainingPerms: List[Row[T]], iterations: Int): Solution = {
 
       remainingPerms match {
-          // TODO - Need to write a test for this edge case
-        case Nil => throw new Exception("No perms remaining. Are you sure about your last score?") // TODO ; Handle this without exception?
+        // TODO - Need to write a test for this edge case & Handle this without exception?
+        case Nil => throw new Exception("No perms remaining. Are you sure about your last score?") 
         case one :: Nil => Solution(one, iterations)
         case _ => {
           val guess = makeGuess(remainingPerms)
@@ -35,11 +30,11 @@ object Solver extends Colour {
     makeGuessAndFilter(AllPermutations(allChoices),0)
   }
 
-  def filterPermutations(guess: Row, score: Score, perms: List[Row]): List[Row] = perms.collect {
+  def filterPermutations(guess: Row[T], score: Score, perms: List[Row[T]]): List[Row[T]] = perms.collect {
     case p if Scorer.score(p, guess) == score => p
   }
 
-  def AllPermutations(allChoices : List[Colour]) : List[Row] = for {
+  def AllPermutations(allChoices : List[T]) : List[Row[T]] = for {
     a <- allChoices
     b <- allChoices
     c <- allChoices

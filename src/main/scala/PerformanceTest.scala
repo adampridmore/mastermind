@@ -1,19 +1,20 @@
 import mastermind.{Row, Score, Scorer, Solver}
 import mastermind.Colours
+import mastermind.Colour
 
 object PerformanceTest extends App {
-  def testPermutation(maker: Row): Int = {
+  def testPermutation(maker: Row[Colour]): Int = {
 
-    def checkGuess(guess: Row): Score = {
+    def checkGuess(guess: Row[Colour]): Score = {
       Scorer.score(maker, guess)
     }
 
-    val solution = Solver.solve(checkGuess, Colours.AllColours)
+    val solution = new Solver[Colour]().solve(checkGuess, Colours.AllColours)
 
     solution.iterations
   }
 
-  val result = Solver.AllPermutations(Colours.AllColours)
+  val result = new Solver[Colour]().AllPermutations(Colours.AllColours)
     .map(perm => (perm, testPermutation(perm)))
     .groupBy(a => a._2)
     .map(a => (a._1, a._2.length))
@@ -24,7 +25,7 @@ object PerformanceTest extends App {
     case (a, b) => a * b 
   }
   .sum
-  .floatValue / Solver.AllPermutations(Colours.AllColours).length.floatValue
+  .floatValue / new Solver().AllPermutations(Colours.AllColours).length.floatValue
 
 
   println("Iterations for all permutations (iterations, number of maker's):")

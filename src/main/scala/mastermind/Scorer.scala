@@ -7,14 +7,14 @@ import mastermind.Colours._
 
 object Scorer {
 
-  def score(makerRow: Row, breakerRow: Row): Score = {
+  def score[T](makerRow: Row[T], breakerRow: Row[T]): Score = {
 
     def redCount =
       makerRow.pegs
         .zip(breakerRow.pegs)
         .count { case (m, b) => m == b }
 
-    def colourCounts(row: Row) = row.pegs.groupBy(identity).mapValues(_.size)
+    def colourCounts(row: Row[T]) = row.pegs.groupBy(identity).mapValues(_.size)
 
     def correctColour = {
       val breakerCounts = colourCounts(breakerRow)
