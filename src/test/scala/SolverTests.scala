@@ -48,5 +48,13 @@ class SolverTests extends AnyWordSpec with Matchers {
       solution.result shouldBe Row[Char]('A','B', 'C','D')
       // solution.iterations shouldBe 4
     }
+
+    // TODO
+    // Not just 2 red 1 white,.
+    // but each letter is either not in word, in word, in word and right place
+    // Which massivly reduces the numbmer of guesses needed.
+    "Solver for wordl also scores the result to each peg" in {
+
+    }
   }
 }

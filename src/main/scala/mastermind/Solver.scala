@@ -11,7 +11,7 @@ class Solver[T] {
     pickOneThird
   }
 
-  def solve(checkGuess: Row[T] => Score, allChoices : List[T]): Solution = {
+  def solve(checkGuess: Row[T] => Score, allChoices : List[T], allPermutations : List[T] => List[Row[T]] = defaultAllPermutations): Solution = {
 
     def makeGuessAndFilter(remainingPerms: List[Row[T]], iterations: Int): Solution = {
 
@@ -27,14 +27,14 @@ class Solver[T] {
       }
     }
 
-    makeGuessAndFilter(AllPermutations(allChoices),0)
+    makeGuessAndFilter(allPermutations(allChoices),0)
   }
 
   def filterPermutations(guess: Row[T], score: Score, perms: List[Row[T]]): List[Row[T]] = perms.collect {
     case p if Scorer.score(p, guess) == score => p
   }
 
-  def AllPermutations(allChoices : List[T]) : List[Row[T]] = for {
+  def defaultAllPermutations(allChoices : List[T]) : List[Row[T]] = for {
     a <- allChoices
     b <- allChoices
     c <- allChoices

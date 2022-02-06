@@ -14,7 +14,7 @@ object PerformanceTest extends App {
     solution.iterations
   }
 
-  val result = new Solver[Colour]().AllPermutations(Colours.AllColours)
+  val result = new Solver[Colour]().defaultAllPermutations(Colours.AllColours)
     .map(perm => (perm, testPermutation(perm)))
     .groupBy(a => a._2)
     .map(a => (a._1, a._2.length))
@@ -25,7 +25,7 @@ object PerformanceTest extends App {
     case (a, b) => a * b 
   }
   .sum
-  .floatValue / new Solver().AllPermutations(Colours.AllColours).length.floatValue
+  .floatValue / new Solver().defaultAllPermutations(Colours.AllColours).length.floatValue
 
 
   println("Iterations for all permutations (iterations, number of maker's):")
