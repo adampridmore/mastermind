@@ -32,4 +32,21 @@ class SolverTests extends AnyWordSpec with Matchers {
       solution.iterations shouldBe 4
     }
   }
+
+  "Solver with letters" should {
+    "handle a word" in {
+      val maker = Row[Char]('A','B', 'C','D')
+
+      def checkGuess(guess: Row[Char]) : Score = {
+        Scorer.score[Char](maker, guess)
+      }
+
+      // val allChars = List('A', 'B', 'C', 'D', 'E')
+      val allChars = ('A' to 'Z').toList
+
+      val solution = new Solver().solve(checkGuess, allChars)
+      solution.result shouldBe Row[Char]('A','B', 'C','D')
+      // solution.iterations shouldBe 4
+    }
+  }
 }
