@@ -1,8 +1,10 @@
-import mastermind.{Row, Score, Scorer, Solver}
-import org.scalatest.{Matchers, WordSpec}
-import mastermind.Colours._
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 
-class SolverTests extends WordSpec with Matchers {
+import mastermind.Colours._
+import mastermind.{Scorer, Row, Score, Solver}
+
+class SolverTests extends AnyWordSpec with Matchers {
   "Mastermind Solver with 3 permutations" should {
 
     "give 1 possibility for a score of 3 red" in {

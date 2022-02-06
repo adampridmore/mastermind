@@ -1,8 +1,10 @@
-import mastermind.{Scorer, Row, Score}
-import org.scalatest.{Matchers, WordSpec}
-import mastermind.Colours._
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 
-class ScorerTests extends WordSpec with Matchers {
+import mastermind.Colours._
+import mastermind.{Scorer, Row, Score}
+
+class ScorerTests extends AnyWordSpec with Matchers {
  "Mastermind Scorer" should {
 
    "score a perfect guess as 4 red and 0 white" in {
