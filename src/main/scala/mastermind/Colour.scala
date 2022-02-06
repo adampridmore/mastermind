@@ -1,16 +1,19 @@
 package mastermind
 
-trait Colour
+trait Colour {
 
-object Colour {
-  def apply(s: String) = s.toUpperCase match {
-    case "RED" | "R" => Colours.Red
-    case "YELLOW" | "Y" => Colours.Yellow
-    case "ORANGE" | "O" => Colours.Orange
-    case "GREEN" | "G" => Colours.Green
-    case "BLACK" | "B" => Colours.Black
-    case "WHITE" | "W" => Colours.White
-    case invalid => throw new IllegalArgumentException(s"Invalid colour: $invalid")
+  // type Colour2 = Colour
+
+  object Colour {
+    def apply(s: String) = s.toUpperCase match {
+      case "RED" | "R" => Colours.Red
+      case "YELLOW" | "Y" => Colours.Yellow
+      case "ORANGE" | "O" => Colours.Orange
+      case "GREEN" | "G" => Colours.Green
+      case "BLACK" | "B" => Colours.Black
+      case "WHITE" | "W" => Colours.White
+      case invalid => throw new IllegalArgumentException(s"Invalid colour: $invalid")
+    }
   }
 }
 

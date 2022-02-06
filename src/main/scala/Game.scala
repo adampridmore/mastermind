@@ -1,4 +1,5 @@
 import mastermind.{Row, Score, Solver}
+import mastermind.Colours
 
 object Game extends App {
 
@@ -15,7 +16,7 @@ object Game extends App {
     Score(red, white)
   }
 
-  val solution = Solver.solve(check)
+  val solution = Solver.solve(check, Colours.AllColours)
 
   println(s"I think you picked: $solution")
 }

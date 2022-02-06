@@ -3,6 +3,7 @@ import org.scalatest.matchers.should.Matchers
 
 import mastermind.Colours._
 import mastermind.{Scorer, Row, Score, Solver}
+import mastermind.Colours
 
 class SolverTests extends AnyWordSpec with Matchers {
   "Mastermind Solver with 3 permutations" should {
@@ -25,7 +26,7 @@ class SolverTests extends AnyWordSpec with Matchers {
         Scorer.score(maker, guess)
       }
 
-      val solution = Solver.solve(checkGuess)
+      val solution = Solver.solve(checkGuess, Colours.AllColours)
       solution.result shouldBe Row(Red, Green, Orange, White)
       solution.iterations shouldBe 4
     }
